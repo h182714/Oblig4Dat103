@@ -1,4 +1,5 @@
-import static java.lang.Thread.sleep;
+package no.hvl.dat103;
+
 
 public class CustomSemaphore {
 
@@ -10,11 +11,7 @@ public class CustomSemaphore {
 
 	public void vent() {
 		while (this.tall <= 0) {
-			try {
-				sleep(10);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			Thread.yield();
 		}
 		this.tall--;
 	}
@@ -22,7 +19,4 @@ public class CustomSemaphore {
 		this.tall++;
 	}
 
-	public int getTall() {
-		return this.tall;
-	}
 }

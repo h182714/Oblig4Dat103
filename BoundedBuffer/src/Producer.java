@@ -1,35 +1,44 @@
 import java.util.Random;
 
-public class Producer implements Runnable{
 
-    private CustomSemaphore sem;
-    private CustomSemaphore tom;
-    private CustomSemaphore full;
-    private Buffer buffer;
-    private Random random;
-;
+public class Producer extends Thread {
 
-    public Producer(CustomSemaphore sem, CustomSemaphore tom, CustomSemaphore full, Buffer buffer){
-		this.full=full;
-		this.sem=sem;
-        this.tom=tom;
+	private Random rand = new Random();
+	private CustomSemaphore full;
+	private CustomSemaphore sem;
+	private CustomSemaphore tom;
+	private Buffer buffer;
+	int bufferSize;
 
-        this.buffer=buffer;
-        this.random = new Random();
-    }
+	public Producer(CustomSemaphore full, CustomSemaphore sem,CustomSemaphore tom, Buffer buffer) {
+		this.full = full;
+		this.sem = sem;
+		this.tom = tom;
+		this.buffer = buffer;
+		bufferSize = tom.getTall() -1;
+
+	}
+
+
 	@Override
 	public void run() {
-		while (true) {
-			tom.Wait();
-			sem.Wait();
+		do {
+			Integer ting = rand.nextInt(100);
+			if(buffer.getBuffer().size() < bufferSize) {
+				tom.vent();
+				sem.vent();
+				buffer.BufferAdd(ting);
+				sem.signal();
+				full.signal();
+			}
 
-			int tall = random.nextInt(100);
 
-			buffer.BufferAdd(tall);
-			System.out.println("Added: " + tall);
+			try {
+				sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 
-			sem.Signal();
-			full.Signal();
-        }
-    }
+		}while (true);
+	}
 }

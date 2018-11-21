@@ -1,29 +1,34 @@
 
 
-public class Consumer extends Thread{
-    CustomSemaphore sem;
-    CustomSemaphore full;
-    CustomSemaphore tom;
-    Buffer buffer;
+public class Consumer extends Thread {
 
-    public Consumer(CustomSemaphore sem, CustomSemaphore full, CustomSemaphore tom, Buffer buffer){
-        this.sem=sem;
-        this.full=full;
-        this.tom=tom;
-        this.buffer=buffer;
+    private CustomSemaphore full;
+    private CustomSemaphore sem;
+    private CustomSemaphore tom;
+    private Buffer buffer;
+
+    public Consumer(CustomSemaphore full, CustomSemaphore sem, CustomSemaphore tom, Buffer buffer) {
+        this.full = full;
+        this.sem = sem;
+        this.tom = tom;
+        this.buffer = buffer;
     }
 
-    public void run(){
-        while (true){
-            full.Wait();
-            sem.Wait();
+    @Override
+    public void run() {
 
+        while (true) {
+
+
+            full.vent();
+            sem.vent();
             Integer tall = buffer.BufferRemove();
-            System.out.println("Removed: " + tall);
+            System.out.println("Remove: " + tall);
+            sem.signal();
+            tom.signal();
 
-            sem.Signal();
-            tom.Signal();
         }
+
     }
 
 }

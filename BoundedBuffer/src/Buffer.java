@@ -3,30 +3,35 @@ import java.util.List;
 
 public class Buffer {
 
-    private ArrayList<Integer> buffer;
-    private int maxSize;
+    private List<Integer> buffer;
 
-    public Buffer(int size) {
+    public Buffer() {
         buffer = new ArrayList<>();
-        maxSize = size;
     }
 
-    public void BufferAdd(Integer i){
-        buffer.add(i);
-        System.out.println("Add: " + i + "From Buffer");
+
+    public void BufferAdd(int i) {
+        Integer tall = i;
+        buffer.add(tall);
+        System.out.println("add " + tall + " to list");
     }
-    public Integer BufferRemove(){
-        if(!buffer.isEmpty()){
-            return buffer.remove(0);
+
+    public Integer BufferRemove() {
+        if(!buffer.isEmpty()) {
+            Integer tall = buffer.remove(0);
+            System.out.println("remove " + tall + " from list");
+            return tall;
+        }else {
+            System.out.println("list empty, return -1");
+            return -1;
         }
-        return null;
     }
 
-    public boolean isEmpty() {
+    public boolean BufferErTom() {
         return buffer.isEmpty();
     }
 
-    public boolean isFull() {
-        return buffer.size() >= maxSize;
+    public List<Integer> getBuffer() {
+        return buffer;
     }
 }
