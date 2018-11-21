@@ -1,42 +1,35 @@
-import java.util.concurrent.Semaphore;
+import java.util.Random;
 
-public class Producer extends Thread{
+public class Producer implements Runnable{
 
-    CustomSemaphore s;
     private CustomSemaphore sem;
     private CustomSemaphore tom;
     private CustomSemaphore full;
     private Buffer buffer;
+    private Random random;
+;
 
-    public Producer(CustomSemaphore s, CustomSemaphore tom, CustomSemaphore full, Buffer buffer){
-        this.s = s;
-        this.sem=sem;
+    public Producer(CustomSemaphore sem, CustomSemaphore tom, CustomSemaphore full, Buffer buffer){
+		this.full=full;
+		this.sem=sem;
         this.tom=tom;
-        this.full=full;
+
         this.buffer=buffer;
+        this.random = new Random();
     }
-    @Override
-    public void run(){
-        do {
-                Integer tall = 1;
-                if(buffer.getBuffer().size() < bufferSize) {
-                    tom.Wait();
-                    sem.Wait();
-                    buffer.addToList(tall);
-                    sem.Signal();
-                    full.Signal();
-                }
+	@Override
+	public void run() {
+		while (true) {
+			tom.Wait();
+			sem.Wait();
 
+			int tall = random.nextInt(100);
 
-                try {
-                    sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+			buffer.BufferAdd(tall);
+			System.out.println("Added: " + tall);
 
-            }while (true);
-        }
-    }
+			sem.Signal();
+			full.Signal();
         }
     }
 }

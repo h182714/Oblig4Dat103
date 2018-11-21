@@ -2,24 +2,21 @@ import static java.lang.Thread.sleep;
 
 public class CustomSemaphore {
 
-public int buffersize;
+	private int buffersize;
 
-public CustomSemaphore(int s){
-    this.buffersize = s;
+public CustomSemaphore(int buffersize){
+    this.buffersize = buffersize;
 }
-public void Wait(){
-    while(buffersize <= 0){
 
-    }try {
-        sleep(2);
-    }catch( InterruptedException e){
-        e.printStackTrace();
+public void Wait(){
+    while(this.buffersize <= 0){
+    	Thread.yield();
     }
-        buffersize--;
+        this.buffersize--;
 }
 
 public void Signal(){
-    buffersize++;
+    this.buffersize++;
 
-}
+	}
 }

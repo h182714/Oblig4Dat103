@@ -3,10 +3,12 @@ import java.util.List;
 
 public class Buffer {
 
-    private List<Integer> buffer;
+    private ArrayList<Integer> buffer;
+    private int maxSize;
 
-    public Buffer(){
+    public Buffer(int size) {
         buffer = new ArrayList<>();
+        maxSize = size;
     }
 
     public void BufferAdd(Integer i){
@@ -19,10 +21,12 @@ public class Buffer {
         }
         return null;
     }
-    public List<Integer> getBuffer(){
-        return buffer;
-    }
-    public boolean BufferErTom(){
+
+    public boolean isEmpty() {
         return buffer.isEmpty();
+    }
+
+    public boolean isFull() {
+        return buffer.size() >= maxSize;
     }
 }

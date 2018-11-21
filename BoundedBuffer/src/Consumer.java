@@ -1,15 +1,13 @@
-import java.util.concurrent.Semaphore;
+
 
 public class Consumer extends Thread{
-    Semaphore sem;
-    CustomSemaphore s;
+    CustomSemaphore sem;
     CustomSemaphore full;
     CustomSemaphore tom;
     Buffer buffer;
 
-    public Consumer(CustomSemaphore s, CustomSemaphore full, CustomSemaphore tom, Buffer buffer){
+    public Consumer(CustomSemaphore sem, CustomSemaphore full, CustomSemaphore tom, Buffer buffer){
         this.sem=sem;
-        this.s=s;
         this.full=full;
         this.tom=tom;
         this.buffer=buffer;
@@ -17,17 +15,14 @@ public class Consumer extends Thread{
 
     public void run(){
         while (true){
-            try{
-                full.wait();
-                s.wait();
+            full.Wait();
+            sem.Wait();
 
-            }catch (InterruptedException e){
-                    e.printStackTrace();
-            }
-            Integer i= buffer.BufferRemove();
-            s.Signal();
+            Integer tall = buffer.BufferRemove();
+            System.out.println("Removed: " + tall);
+
+            sem.Signal();
             tom.Signal();
-            System.out.println("Removed: " + i);
         }
     }
 
