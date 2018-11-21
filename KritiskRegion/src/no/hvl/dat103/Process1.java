@@ -14,7 +14,7 @@ public class Process1 implements Runnable {
 			cs.KritiskRegion1();
 			synchronized(this) {
 				try{
-					this.wait(900);
+					this.wait(950);
 				}catch(InterruptedException e){
 
 				}

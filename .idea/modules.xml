@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/BoundedBufferSem/BoundedBufferSem.iml" filepath="$PROJECT_DIR$/BoundedBufferSem/BoundedBufferSem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DiningPhilosophers/DiningPhilosophers.iml" filepath="$PROJECT_DIR$/DiningPhilosophers/DiningPhilosophers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DiningPhilosophersSem/DiningPhilosophersSem.iml" filepath="$PROJECT_DIR$/DiningPhilosophersSem/DiningPhilosophersSem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KritiskRegion/KritiskRegion.iml" filepath="$PROJECT_DIR$/KritiskRegion/KritiskRegion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Oblig4Dat103.iml" filepath="$PROJECT_DIR$/.idea/Oblig4Dat103.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ReaderWriter/ReaderWriter.iml" filepath="$PROJECT_DIR$/ReaderWriter/ReaderWriter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ReaderWriterSem/ReaderWriterSem.iml" filepath="$PROJECT_DIR$/ReaderWriterSem/ReaderWriterSem.iml" />
+    </modules>
+  </component>
+</project>
